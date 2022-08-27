@@ -1,12 +1,11 @@
 import React from "react";
-import './Title.css';
 
-const Title = ({text}) => {
+const Label = ({ text }) => {
     return (
         <div>
             <label> {text} </label>
         </div>
     )
-};  
+};
 
-export default Title;
+export default Label;
