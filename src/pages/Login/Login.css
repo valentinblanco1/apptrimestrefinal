@@ -1,25 +1,24 @@
 .login-container {
-    width: 320px ;
-    height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
     background: #E3DDA9;
-    color: #000;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    padding: 70px 30px;
-    border-radius: 25px;
 }
 
-.logo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+.login-content {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
     position: absolute;
-    top: -10%;
-    left: calc(50% - 50px);
 }
+
 .titulo {
     margin: 0;
     padding: 0;
@@ -27,44 +26,46 @@
     font-size: 22px;
 }
 
-.registro label {
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.registro input {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.registro input[type = "text"], input[type = "password"] {
+.submit-button {
+    width: 90%;
+    height: 40px;
+    border-radius: 25px;
     border: none;
-    border-bottom: 1px solid #000;
-    background: transparent;
     outline: none;
-    height: 40px;
-    color: #000;
-    font-size: 16px;
-}
-
-.login-container button {
-    border: none;
-    height: 40px;
     background: #E3E1D7;
     color: #000;
-    font-size: 18px;
-    border-radius: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
-    margin-top: 10px;
-    
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    opacity: 0.6;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    margin-bottom: 400px;
     
 }
 
-.login-container button:hover {
-    cursor:pointer;
-    background: #D3C75A ;
-    color: #000;
+.label-error {
+    font-size: 12px;
+    color: red;
+    background: #fff;
+    width:fit-content;
+    height: fit-content;
+    padding: 0 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-left: 10px;
 }
