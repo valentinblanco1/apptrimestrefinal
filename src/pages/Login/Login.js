@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import './Login.css';
+import logo from '../../assets/img/logoapp.png';
 import Title from "./componentes/Title/Title";
 import Label from "./componentes/Label/Label";
 import Input from "./componentes/Input/Input";
 
 
+
 const Login = () => {
 
-    const [ user, setUser ] = useState('')
-    const [ password, setPassword ] = useState('')
+    const [ user, setUser ] = useState('');
+    const [ password, setPassword ] = useState('');
 
     function handleChange (name, value) {
         if(name === 'usuario') {
@@ -25,12 +27,13 @@ const Login = () => {
         }
     };
 
-    console.log('usuario:', user)
-    console.log('password:', password)
+    
 
     return (
         <div className="login-container">
-            <Title  text='APP TRIMESTRE'/>
+            <img src={logo} className="logo" />
+           <div className="titulo"><Title  text='¡Bienvenidos!'/></div>
+            <div className="registro">
             <Label  text= 'Usuario'/>
             <Input 
             attribute={{
@@ -51,9 +54,14 @@ const Login = () => {
             }}
             handleChange={handleChange}
             />
+
+        
+            </div>
+            
             <button onClick={handleSubmit}>
-                Ingresar
+               Ingresar 
             </button>
+            
         </div>
     )
 };
