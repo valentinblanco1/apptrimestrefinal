@@ -12,26 +12,40 @@ const Login = () => {
     const [ user, setUser ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ passwordError, setPasswordError ] = useState (false);
+    const [ isLogin, setIsLogin ] = useState (false);
+    const [ hasError, setHasError ] = useState(false);
 
     function handleChange (name, value) {
         if(name === 'usuario') {
-            setUser(value)
+            setUser(value);
+            setHasError(false);
         } else {
             if(value.length < 6) {
                 setPasswordError(true);
+                setHasError(false);
             } else {
                 setPasswordError(false);
-                setPassword(value)
+                setPassword(value);
+                setHasError(false);
             }
         }
     };
 
-    function ifMatch(param){
-        if(param.user < 0 && param.password > 0){
-            if(param.user === 'Malandro' && param.password === '123456') {
-                const {user, password} = param:
-                let ac = {user, password}
+    function ifMatch(param) {
+        if(param.user.length > 0 && param.password.length > 0) {
+            if(param.user === 'Valentin' && param.password === 'valentin12') {
+                const { user, password } = param;
+                let ac = { user, password };
+                let account = JSON.stringify(ac);
+                localStorage.setItem('accont', account);
+                setIsLogin(true);
+            } else {
+                setIsLogin(false);
+                setHasError(true);
             }
+        } else {
+            setIsLogin(false);
+            setHasError(true);
         }
     }
     
@@ -46,11 +60,23 @@ const Login = () => {
 
     return (
         <div className="login-container">
+            
             <img src={logo} className="logo" />
-           <div className="login-content">
+            { isLogin ?
+                <div className="home-container">
+                    <h1> ¡Hola, {user}! </h1>
+                    <label>Has sido Logueado Correctamente</label>
+                </div>
+            :
+            <div className="login-content">
             <div className="titulo">
             <Title  text='¡Bienvenidos!'/>
             </div>
+            { hasError &&
+              <label className="label-alerta">
+                Su Contraseña o Usuario son Incorrectos, o Inexistente.
+              </label>
+            }
             <Label  text= 'Usuario'/>
             <Input 
             attribute={{
@@ -84,6 +110,8 @@ const Login = () => {
             </button>
             </div>
            </div>
+            
+            }
             
         </div>
     )
