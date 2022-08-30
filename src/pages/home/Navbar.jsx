@@ -1,7 +1,8 @@
 import React, {useState} from "react"
 import styled from 'styled-components'
 import MenuButton from "./MenuButton";
-import logo from "../../assets/img/logoapp.png"
+import logo from "../../assets/img/logoapp.png";
+import { Link } from "react-router-dom";
 
 function Navbar() {
     const [clicked, setClicked] = useState(false)
@@ -10,6 +11,9 @@ function Navbar() {
         //cuando la condicion es verdadera lo pasa a falso y vice versa
         setClicked(!clicked)
     }
+
+
+
     return(
         <>
             <NavContainer>
@@ -18,7 +22,7 @@ function Navbar() {
                     <img src={logo} className="logo-menu" />
                     <a href="/">Inicio</a>
                     <a href="/">Buscar Alumno</a>
-                    <a href="/">Modo Administrador</a>
+                    <Link to="loginadmin">Modo Administrador</Link>
                 </div>
                 <div className="button-menu">
                 <MenuButton clicked={clicked} handleClick={handleClick}/>
