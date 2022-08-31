@@ -1,8 +1,12 @@
-import React, {useState} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import styled from 'styled-components'
 import MenuButton from "./MenuButton";
 import logo from "../../assets/img/logoapp.png";
 import { Link } from "react-router-dom";
+import logo2 from '../../assets/img/slider1.jfif';
+import logo3 from '../../assets/img/slider2.jfif';
+import logoepet from '../../assets/img/logoepet.jpg';
+
 
 function Navbar() {
     const [clicked, setClicked] = useState(false)
@@ -12,25 +16,87 @@ function Navbar() {
         setClicked(!clicked)
     }
 
+    const slideshow = useRef(null);
 
+    const siguiente = () => {
+        //comprobamos que slideshow tenga elementos
+        if(slideshow.current.children.length > 0){
+            //obtenemos el primer elemento de slideshow
+            const primerElemento = slideshow.current.children [0];
+            //establecemos la transicion para el slideshow
+            slideshow.current.style.transition = `3000ms ease-out all`;
+
+            const tamañoSlide = slideshow.current.children[0].offsetWidth;
+
+            slideshow.current.style.transform = `translateX(-${tamañoSlide}px)`;
+
+            const transicion = () => {
+            slideshow.current.style.transition = 'none';
+            slideshow.current.style.transform = `translateX(0)`;
+
+            slideshow.current.appendChild(primerElemento);
+            }
+
+            slideshow.current.addEventListener('transitionend', transicion);
+            
+        }
+    }
+
+    useEffect(() => {
+        setInterval(() => {
+           siguiente(); 
+        }, 5000);
+    }, []);
 
     return(
         <>
             <NavContainer>
-                <h2>APP <span>TRIMESTRAL</span></h2>
-                <div className={`links ${clicked ? 'active' : ''}`}>
-                    <img src={logo} className="logo-menu" />
-                    <a href="/">Inicio</a>
-                    <a href="/">Buscar Alumno</a>
-                    <Link to="loginadmin">Modo Administrador</Link>
-                </div>
-                <div className="button-menu">
-                <MenuButton clicked={clicked} handleClick={handleClick}/>
-                </div>
-                <Bgdiv className={`initial ${clicked ? 'active' : ''}`}></Bgdiv>
+                <div className="menu">
+                    <h2>APP <span>TRIMESTRAL</span></h2>
+                    <div className={`links ${clicked ? 'active' : ''}`}>
+                        <img src={logo} className="logo-menu" />
+                        <a href="/">Inicio</a>
+                        <a href="/">Buscar Alumno</a>
+                        <Link to="loginadmin">Modo Administrador</Link>
+                     </div>
+                    <div className="button-menu">
+                        <MenuButton clicked={clicked} handleClick={handleClick}/>
+                    </div>
+                    <Bgdiv className={`initial ${clicked ? 'active' : ''}`}></Bgdiv>
+               </div>
             </NavContainer>
+           <SliderContainer> 
+            <ContenedorSlider ref={slideshow}>
+                
+                
+                    <Slide>
+                        <a href="/">
+                        <img src={logo2} className="logo2" /> 
+                        </a>
+                    </Slide>
+                    <Slide>
+                        <a href="/">
+                        <img src={logo3} className="logo3" /> 
+                        </a>
+                    </Slide>
+                        
+                
+                
+            </ContenedorSlider>
+           </SliderContainer>
 
-        
+           <LogoE>
+           <div className="infoe">
+            
+                <div className="logoep">
+                <img src={logoepet} className="logoe"/>
+                </div>
+                <div className="cajah2">
+                <h2>App para uso de 
+                    Notas de Trimestre</h2>
+                </div>
+           </div>
+           </LogoE>
         </>
     )
 }
@@ -38,7 +104,13 @@ function Navbar() {
 export default Navbar;
 
 const NavContainer = styled.nav`
-    h2 {
+    
+   .menu {
+    position:relative;
+    z-index: 99;
+   }
+
+    .menu h2 {
         color: #000;
         font-weight: 400;
         span{
@@ -51,13 +123,13 @@ const NavContainer = styled.nav`
     align-items: center;
     justify-content: space-between;
 
-    a{
+     a{
         color: #000;
         text-decoration: none;
         margin-right: 1rem;
     }
 
-    .button-menu {
+    .menu .button-menu {
        @media(min-width: 768px){
         display: none;
        }
@@ -72,6 +144,7 @@ const NavContainer = styled.nav`
         margin-right: auto;
         text-align: center;
         transition: all .5s ease;
+       
         a{
             color: #000;
             font-size: 2rem;
@@ -88,10 +161,10 @@ const NavContainer = styled.nav`
        } 
     }
 
-    .links.active{
+    .menu .links.active{
         width: 100%;
         display: block;
-        position: absolute;
+        position: relative;
         margin-left: auto;
         margin-right: auto;
         top: 30%;
@@ -105,11 +178,11 @@ const NavContainer = styled.nav`
         }
     }
 
-    .logo-menu {
+    .menu .logo-menu {
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        position: relativa;
+        position: relative;
         margin: auto;
     }
 `
@@ -130,5 +203,63 @@ const Bgdiv = styled.div`
         width: 100%;
         height: 100%;
     }
+
+`
+const SliderContainer = styled.div`
+
+
+
+`
+const ContenedorSlider = styled.div`
+    display: flex;
+    flex-wrap: nowrap;
+`
+const Slide = styled.div`
+    min-width: 100%;  
+    overflow: hidden;
+    transition: .3s ease all;
+    z-index: 9 ;  
+    max-height: 500px;
+    position: relative;
+    
+    img {
+        width: 100%;
+        vertical-align: top;
+    }
+`
+const LogoE = styled.div`
+
+.logoe {
+    margin-top: 15px;
+    padding: 15px;
+    width: 280px;
+    height: 280px;
+    padding-left: 25px;
+}
+
+.cajah2 {
+    padding-left:25px;
+    
+}
+
+ h2 {
+    background-color: #E3DDA9;
+    width: 200px;
+    padding: 35px;
+    margin: 15px;
+    margin-top: 35px;
+    padding-left: 25px;
+    display: flex;
+    border-radius: 20%;
+    
+
+    
+}
+
+.infoe {
+    display: flex;
+}
+
+
 
 `
