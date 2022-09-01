@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import logo2 from '../../assets/img/slider1.jfif';
 import logo3 from '../../assets/img/slider2.jfif';
 import logoepet from '../../assets/img/logoepet.jpg';
+import imgF from '../../assets/img/icons8-facebook-nuevo.svg';
+import imgI from '../../assets/img/icons8-instagram.svg';
 
 
 function Navbar() {
@@ -49,14 +51,14 @@ function Navbar() {
     }, []);
 
     return(
-        <>
+        <ContenedorPantalla>
             <NavContainer>
                 <div className="menu">
                     <h2>APP <span>TRIMESTRAL</span></h2>
                     <div className={`links ${clicked ? 'active' : ''}`}>
                         <img src={logo} className="logo-menu" />
                         <a href="/">Inicio</a>
-                        <a href="/">Buscar Alumno</a>
+                        <Link to="buscaralumno">Buscar Alumno</Link>
                         <Link to="loginadmin">Modo Administrador</Link>
                      </div>
                     <div className="button-menu">
@@ -92,16 +94,29 @@ function Navbar() {
                 <img src={logoepet} className="logoe"/>
                 </div>
                 <div className="cajah2">
-                <h2>App para uso de 
-                    Notas de Trimestre</h2>
+                <h2> 
+                <div className="imgF">
+                    <img src={imgF}>
+                    </img>
+                </div>
+                <div className="imgI">
+                    <img src={imgI} href="" />
+                </div>
+                </h2>
                 </div>
            </div>
            </LogoE>
-        </>
+        </ContenedorPantalla>
     )
 }
 
 export default Navbar;
+
+const ContenedorPantalla = styled.div`
+
+background: #E1DDB8;
+
+`
 
 const NavContainer = styled.nav`
     
@@ -235,22 +250,35 @@ const LogoE = styled.div`
     width: 280px;
     height: 280px;
     padding-left: 25px;
+    border-radius: 30px;
 }
 
 .cajah2 {
     padding-left:25px;
-    
-}
-
- h2 {
-    background-color: #E3DDA9;
+    padinng-right: 25px;
     width: 200px;
     padding: 35px;
     margin: 15px;
     margin-top: 35px;
-    padding-left: 25px;
     display: flex;
     border-radius: 20%;
+    
+
+    
+}
+
+ h2 {
+    width: 200px;
+    padding: 50px;
+    margin: 20px;
+    margin-top: 20px;
+    padding-left: 50px;
+    display: flex;
+    border-radius: 20%;
+    background-color: #FFF;
+    justify-content:center
+    
+    
     
 
     
